@@ -1,0 +1,35 @@
+{
+  "name": "codeleap-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "jest --watchAll"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-icons": "^4.3.1",
+    "react-redux": "^7.2.8",
+    "react-router-dom": "^6.3.0",
+    "react-test-renderer": "^18.0.0",
+    "redux": "^4.1.2",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^13.0.0",
+    "@types/jest": "^27.4.1",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.24",
+    "@vitejs/plugin-react": "^1.0.7",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.0"
+  }
+}
