@@ -8,14 +8,20 @@ padding: .75rem 0;
 color: ${({ color }) => color};
 background-color: ${({ backgroundColor }) => backgroundColor};
 
-border: none;
+border: solid 1px ${({ color }) => color};
 font-weight: 700;
 font-size: 1rem;
 text-transform: uppercase;
-transition: .75s ease;
+transition: .5s ease;
 
 cursor: pointer;
 cursor: ${({ disabled }) => disabled && 'not-allowed'};
-opacity: ${({ disabled }) => disabled && '.5'};
+opacity: ${({ disabled }) => disabled && '.25'};
+
+&:hover {
+    color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ color }) => color};
+    border: solid 1px ${({ backgroundColor }) => backgroundColor};
+}
 
 `
