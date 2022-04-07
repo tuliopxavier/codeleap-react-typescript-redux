@@ -1,33 +1,39 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { Button } from '../../components/Button';
-import { Main, Form } from './styled';
+import { Main } from  '../../components/Main'
+import { Form } from './styled';
 
 export const SignUpPage = () => {
     const [isDisabled, setIsDisabled] = useState<boolean>(true);
-    const input = useRef<any>(null);
+    const [username, setUsername] = useState('');
+    const input = useRef<any>();
     
-    function handleInput() {
+    function handleInput(e: ChangeEvent<HTMLInputElement>) {
         (input.current.value.length > 0) ? setIsDisabled(false) : setIsDisabled(true);
+        setUsername(e.currentTarget.value);
     };
 
-    function handleSubmit(e: SubmitEvent) {
+    function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log('clicked');
+        setUsername(e.currentTarget.value);
+        console.log(username);
+        // some validation logic
+        // if ok redirect to main page
     };
 
     useEffect(() => {
         input.current.focus();
-      }, []);
+    }, []);
 
     return (
         <Main>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <h1>Welcome to CodeLeap network!</h1>
                 <label htmlFor="">
                     Please enter your user name 
                     {isDisabled && <small>(required)</small>}
                 </label>
-                <input ref={input} onChange={handleInput} type="text" placeholder="John Doe" />
+                <input ref={input} onChange={handleInput} type="text" placeholder="John Doe" required />
                 <Button disabled={isDisabled}>Enter</Button>
             </Form>
         </Main>

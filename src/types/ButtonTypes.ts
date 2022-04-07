@@ -1,6 +1,7 @@
 export type ButtonProps = {
     color?: string;
     backgroundColor?: string;
-    children: string;
+    children: any;
+    onClick?: ()=>void;
     disabled?: boolean;
 }
