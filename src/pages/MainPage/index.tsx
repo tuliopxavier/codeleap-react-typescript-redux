@@ -5,24 +5,30 @@ import { Main } from '../../components/Main';
 import { Button } from '../../components/Button';
 import { Post } from '../../components/Post';
 import { MdKeyboardArrowUp, MdLogout } from 'react-icons/Md';
-import { fakeData } from '../../../fakeData';
 import { format } from 'date-fns';
 import { Section, UpButton } from './styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { setUsername } from '../../actions/userSlice';
+import { setPosts } from '../../actions/postsSlice';
 // import api from '../../actions/services/api';
 
 export const MainPage = () => {
-    const [username, setUsername] = useState('tuliopxavier');
-    const [inputValue, setInputValue] = useState('tuliopxavier');
-    const [textareaValue, setTextareaValue] = useState('tuliopxavier');
+    const [inputValue, setInputValue] = useState('');
+    const [textareaValue, setTextareaValue] = useState('');
 
     const [id, setId] = useState(0);
     const [isDisabled, setIsDisabled] = useState(true);
-    const [posts, setPosts] = useState<PostProps[]>(fakeData);
     const [hideScrollTopButton, setHideScrollTopButton] = useState('hide-button');
 
+    const username = useSelector((state: RootState) => state.username.value);
+    const posts = useSelector((state: RootState) => state.posts.value);
+    const dispatch = useDispatch();
+    
     const input = useRef<HTMLInputElement>(null);
     const textarea = useRef<HTMLTextAreaElement>(null);
 
+    // IF GOING TO FETCH FROM THE API
     // async function getPosts() {
     //     const { data } = await api.get('/?format=json');
     //     setPosts(data.results);        
@@ -58,14 +64,17 @@ export const MainPage = () => {
             title: inputValue,
             content: textareaValue
         }
-
-        setPosts([...posts, newPost]);
+        console.log(newPost);
+        
+        setPosts(newPost);
         input?.current?.focus();
         window.scroll({ top: 645, behavior: "smooth" });
+        console.log(posts);
+        
     };
 
     function handleLogout() {
-        setUsername('');
+        dispatch(setUsername(''));
     };
 
     // show scrolling top button at window view bottom
@@ -86,7 +95,7 @@ export const MainPage = () => {
                 <Section>
                     <header>
                         <h1>CodeLeap Network</h1>
-                        <Button onClick={handleLogout}><MdLogout/>Logout</Button>
+                        <Button onClick={handleLogout}><MdLogout />Logout</Button>
                     </header>
 
                     <form onSubmit={handleSubmit}>
@@ -114,7 +123,7 @@ export const MainPage = () => {
                     </UpButton>
                 </Section>
                 :
-                <Navigate to={'/signup'} />
+                <Navigate to='/signup' />
             }
         </Main>
     );
