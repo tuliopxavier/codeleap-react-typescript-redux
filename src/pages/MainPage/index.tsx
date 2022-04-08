@@ -16,7 +16,7 @@ export const MainPage = () => {
     const [inputValue, setInputValue] = useState('');
     const [textareaValue, setTextareaValue] = useState('');
 
-    const [id, setId] = useState(0);
+    const [id, setId] = useState(10);
     const [isDisabled, setIsDisabled] = useState(true);
     const [hideScrollTopButton, setHideScrollTopButton] = useState('hide-button');
 

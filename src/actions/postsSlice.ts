@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { PostsState } from '../types/PostTypes';
-import { PostProps } from '../types/PostTypes';
+import type { PostsState, PostProps, EditPostProps } from '../types/PostTypes';
 import { fakeData } from '../../fakeData';
 
 const initialState: PostsState = {
@@ -15,12 +14,22 @@ export const postsSlice = createSlice({
             state.value.push(action.payload);
         },
         deletePost: (state, action: PayloadAction<number>) => {           
-            const filteredPosts = state.value.filter(post => post.id !== action.payload)
+            const filteredPosts = state.value.filter(post => post.id !== action.payload);
             state.value = filteredPosts;
+        },
+        editPost: (state, action: PayloadAction<EditPostProps>) => {
+            const editedPosts = state.value.map((post) => {
+                if (post.id === action.payload.id) {
+                    post.title = action.payload.title;
+                    post.content = action.payload.content;
+                }
+                return post;
+            })
+            state.value = editedPosts;
         }
     }
 });
 
-export const { setPosts, deletePost } = postsSlice.actions;
+export const { setPosts, deletePost, editPost } = postsSlice.actions;
 
 export default postsSlice.reducer;

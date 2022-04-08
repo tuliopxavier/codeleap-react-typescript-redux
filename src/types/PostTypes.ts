@@ -13,3 +13,9 @@ export interface PostItemProps {
 export interface PostsState {
     value: PostProps[];
 };
+
+export type EditPostProps = {
+    id: number, 
+    title: string, 
+    content: string
+};
