@@ -1,4 +1,3 @@
-import type { PostProps } from '../../types/PostTypes';
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Main } from '../../components/Main';
@@ -41,15 +40,15 @@ export const MainPage = () => {
 
     function handleChangeInput(e: React.ChangeEvent<HTMLInputElement>) {
         (input?.current?.value.length && textarea?.current?.value.length) ? setIsDisabled(false) : setIsDisabled(true);
-        setInputValue(e.currentTarget.value);
+        setInputValue(e.target.value);
     };
 
     function handleChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
         (input?.current?.value.length && textarea?.current?.value.length) ? setIsDisabled(false) : setIsDisabled(true);
-        setTextareaValue(e.currentTarget.value);
+        setTextareaValue(e.target.value);
     };
 
-    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    function handleSubmit(e: MouseEvent) {
         e.preventDefault();
         if (!inputValue) return;
         if (!textareaValue) return;
@@ -63,14 +62,15 @@ export const MainPage = () => {
             created_datetime: date,
             title: inputValue,
             content: textareaValue
-        }
-        console.log(newPost);
+        };
         
-        setPosts(newPost);
-        input?.current?.focus();
-        window.scroll({ top: 645, behavior: "smooth" });
+        dispatch(setPosts(newPost));
         console.log(posts);
         
+        setInputValue('');
+        setTextareaValue('');
+        input?.current?.focus();
+        window.scroll({ top: 645, behavior: "smooth" });
     };
 
     function handleLogout() {
@@ -98,20 +98,20 @@ export const MainPage = () => {
                         <Button onClick={handleLogout}><MdLogout />Logout</Button>
                     </header>
 
-                    <form onSubmit={handleSubmit}>
+                    <form>
                         <h2>What's on your mind?</h2>
 
                         <label htmlFor="title">
                             Title {isDisabled && <small>(required)</small>}
                         </label>
-                        <input ref={input} onChange={handleChangeInput} type="text" id="title" placeholder="Hello World" maxLength={50} required />
+                        <input ref={input} value={inputValue} onChange={handleChangeInput} type="text" id="title" placeholder="Hello World" maxLength={50} required />
 
                         <label htmlFor="content">
                             Content {isDisabled && <small>(required)</small>}
                         </label>
-                        <textarea ref={textarea} onChange={handleChangeTextarea} id="content" cols={30} rows={10} placeholder="Content here" maxLength={805} required></textarea>
+                        <textarea ref={textarea} value={textareaValue} onChange={handleChangeTextarea} id="content" cols={30} rows={10} placeholder="Content here" maxLength={805} required></textarea>
 
-                        <Button disabled={isDisabled}>Create</Button>
+                        <Button onClick={handleSubmit}disabled={isDisabled}>Create</Button>
                     </form>
 
                     <ul className="posts-list">

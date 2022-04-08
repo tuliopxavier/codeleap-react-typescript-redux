@@ -6,6 +6,9 @@ import { Button } from '../Button';
 import useClickOutside from '../../hooks/useClickOutside';
 import Fade from 'react-reveal/Fade';
 import { DeleteDialog, EditDialog, PostItem } from './styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { deletePost } from '../../actions/postsSlice';
+import { RootState } from '../../redux/store';
 
 export const Post = ({post}: PostItemProps) => {
     const [isDeleting, setIsDeleting] = useState<boolean>(false);
@@ -14,6 +17,9 @@ export const Post = ({post}: PostItemProps) => {
     const editDialog = useRef<HTMLDivElement>(null);
     
     const { id, username, created_datetime, title, content } = post;
+    const Username = useSelector((state: RootState) => state.username.value);
+
+    const dispatch = useDispatch();
 
     // handle click outside modal
     useClickOutside(deleteDialog, () => {
@@ -33,7 +39,7 @@ export const Post = ({post}: PostItemProps) => {
     };
 
     function handleDeletePost(id: number) {
-        console.log('delete clicked', id );
+        dispatch(deletePost(id));
         // const filteredPosts = posts.filter(post => post.id !== id);
         // setPosts(filteredPosts);
     };
@@ -46,7 +52,7 @@ export const Post = ({post}: PostItemProps) => {
             <PostItem isDeleting={isDeleting} isEditing={isEditing}>
                 <header>
                     <h3>{title}</h3>
-                    {username === 'tuliopxavier' && <div className="icons">
+                    {username === Username && <div className="icons">
                         <button onClick={toogleDeleteModal} aria-label="Delete post button"><MdDeleteForever /></button>
                         <button onClick={toogleEditModal} aria-label="Edit post button"><FaEdit /></button>
                     </div>}

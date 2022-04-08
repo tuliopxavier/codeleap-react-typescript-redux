@@ -7,6 +7,7 @@ export const PostItem = styled.article<any>`
   margin: 0 2.5rem 2rem;
   font-size: 18px;
   min-height: 349px;
+  transition: all .5 ease;
 
   & header {
     display: flex;
