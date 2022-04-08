@@ -1,11 +1,12 @@
 import type { PostProps } from '../../types/PostTypes';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Main } from '../../components/Main';
 import { Button } from '../../components/Button';
 import { Post } from '../../components/Post';
 import { MdKeyboardArrowUp, MdLogout } from 'react-icons/Md';
 import { fakeData } from '../../../fakeData';
+import { format } from 'date-fns';
 import { Section, UpButton } from './styled';
 // import api from '../../actions/services/api';
 
@@ -48,18 +49,19 @@ export const MainPage = () => {
         if (!textareaValue) return;
 
         setId(id + 1);
-        let date = new Date();
+        let date = format(new Date(), "HH:mm:ss");
 
         const newPost = {
             id: id,
             username: username,
-            created_datetime: date.toString(),
+            created_datetime: date,
             title: inputValue,
             content: textareaValue
         }
 
         setPosts([...posts, newPost]);
         input?.current?.focus();
+        window.scroll({ top: 645, behavior: "smooth" });
     };
 
     function handleLogout() {
@@ -104,7 +106,7 @@ export const MainPage = () => {
                     </form>
 
                     <ul className="posts-list">
-                        {posts?.map(post => { return <Post post={post} /> })}
+                        {posts?.map(post => { return <Post key={post.id} post={post} /> })}
                     </ul>
 
                     <UpButton className={hideScrollTopButton} onClick={handleScrollTop} aria-label="scroll to top button">
