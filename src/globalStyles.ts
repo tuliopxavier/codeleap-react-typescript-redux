@@ -19,5 +19,10 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
     }
 
-    /* @media (max-width: 768px) {} */
+    @media screen and (prefers-color-scheme: dark) {
+        body {
+            color: #ddd;
+            background-color: #222;
+        }
+    }
 `

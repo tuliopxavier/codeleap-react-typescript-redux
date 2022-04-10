@@ -17,7 +17,11 @@ export const PostItem = styled.article<any>`
   }
 
   @media (max-width: 320px) {
-        margin: 2.75rem 1rem;
+    margin: 2.75rem 1rem;
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    border: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? '1px solid #00000050' : '1px solid #000'};
     }
 
   & header {
@@ -26,6 +30,10 @@ export const PostItem = styled.article<any>`
     color: #fff;
     filter: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 'blur(1px)' : ''};
     opacity: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 0.25 : 1};
+
+    @media screen and (prefers-color-scheme: dark) {
+      color: #ddd;
+    }
 
     & .icons {
       display: flex;
@@ -42,6 +50,10 @@ export const PostItem = styled.article<any>`
         @media (max-width: 425px) {
             font-size: 1.5rem;
         }
+
+        @media screen and (prefers-color-scheme: dark) {
+          color: #ddd;
+        }
       }
     }
   }
@@ -53,6 +65,10 @@ export const PostItem = styled.article<any>`
     margin: 1.5rem 2rem;
     filter: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 'blur(1px)' : ''};
     opacity: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 0.25 : 1};
+
+    @media screen and (prefers-color-scheme: dark) {
+      color: #ddd;
+    }
   }
 
   & > p {
@@ -87,6 +103,10 @@ export const DeleteDialog = styled.dialog`
   border: 1px solid #000;
   animation: modal-animation 0.25s ease;
 
+  @media screen and (prefers-color-scheme: dark) {
+    background-color: #ddd;
+  }
+
   & p {
     margin-bottom: 3rem;
   }
@@ -95,12 +115,6 @@ export const DeleteDialog = styled.dialog`
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
-  }
-
-  & .edit-content {
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
   }
 
   @keyframes modal-animation {
@@ -124,6 +138,10 @@ export const EditDialog = styled.dialog`
   padding: 2rem;
   border: 1px solid #000;
   animation: modal-animation 0.25s ease;
+
+  @media screen and (prefers-color-scheme: dark) {
+    background-color: #ddd;
+  }
 
   & p {
       margin-bottom: 2rem;

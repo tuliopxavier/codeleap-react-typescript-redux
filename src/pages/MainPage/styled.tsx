@@ -7,6 +7,11 @@ width: 800px;
 min-height: 100vh;
 background-color: #fff;
 
+@media screen and (prefers-color-scheme: dark) {
+    color: #ddd;
+    background-color: #333;
+}
+
 & header {
     display: flex;
     align-items: center;
@@ -23,6 +28,10 @@ background-color: #fff;
         @media (max-width: 425px) {
             font-size: 1rem;
         }
+
+        @media screen and (prefers-color-scheme: dark) {
+            color: #ddd;
+        }
     }
 
     & button {
@@ -35,6 +44,10 @@ background-color: #fff;
 
         @media (max-width: 425px) {
             font-size: 0.75rem;
+        }
+
+        @media screen and (prefers-color-scheme: dark) {
+            background-color: #000;
         }
     }
 }
@@ -56,6 +69,10 @@ background-color: #fff;
 
     @media (max-width: 320px) {
         margin: 2.75rem 1rem;
+    }
+
+    @media screen and (prefers-color-scheme: dark) {
+        border: 1px solid #000;
     }
 
     & h2 {
@@ -88,6 +105,11 @@ background-color: #fff;
         &::placeholder {
             opacity: .3;
         }
+
+        @media screen and (prefers-color-scheme: dark) {
+            color: #ddd;
+            background-color: #222;
+        }
     }
 
     & textarea {
@@ -101,6 +123,11 @@ background-color: #fff;
         &::placeholder {
             opacity: .3;
         }
+
+        @media screen and (prefers-color-scheme: dark) {
+            color: #ddd;
+            background-color: #222;
+        }
     }
 
     & button {
@@ -113,7 +140,7 @@ background-color: #fff;
     flex-direction: column-reverse;
 }
 `
-    
+
 
 export const UpButton = styled.button`
 

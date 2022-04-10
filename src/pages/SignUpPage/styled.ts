@@ -9,6 +9,12 @@ border: 1px solid #ccc;
 padding: 1.75rem 2rem;
 margin: 1rem;
 
+@media screen and (prefers-color-scheme: dark) {
+    color: #ddd;
+    background-color: #333;
+    border: 1px solid #222;
+}
+
 & h1 {
     font-size: 1.5rem;
     margin-bottom: 2rem;
@@ -34,6 +40,11 @@ margin: 1rem;
 
     &::placeholder {
         opacity: .3;
+    }
+
+    @media screen and (prefers-color-scheme: dark) {
+        color: #ddd;
+        background-color: #222;
     }
 }
 
