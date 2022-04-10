@@ -19,15 +19,23 @@ background-color: #fff;
     & h1 {
         color: #fff;
         font-size: 1.5rem;
+
+        @media (max-width: 425px) {
+            font-size: 1rem;
+        }
     }
 
     & button {
         display: flex;
         align-items: center;
+        justify-content: center;
         border: none;
         gap: .5rem;
-        padding-left: .5rem;
         text-decoration: underline;
+
+        @media (max-width: 425px) {
+            font-size: 0.75rem;
+        }
     }
 }
 
@@ -38,9 +46,25 @@ background-color: #fff;
     padding: 1.75rem 2rem;
     margin: 2.75rem 2.5rem;
 
+    @media (max-width: 425px) {
+        margin: 2.75rem 2rem;
+    }
+
+    @media (max-width: 375px) {
+        margin: 2.75rem 1rem;
+    }
+
+    @media (max-width: 320px) {
+        margin: 2.75rem 1rem;
+    }
+
     & h2 {
         font-size: 1.5rem;
         margin-bottom: 2rem;
+
+        @media (max-width: 425px) {
+            font-size: 1.25rem;
+        }
     }
 
     & label {
@@ -71,6 +95,7 @@ background-color: #fff;
         font-size: 1rem;
         padding: .5rem .75rem;
         border-radius: .25rem;
+        border: 1px solid #777;
         margin-bottom: 2rem;
 
         &::placeholder {

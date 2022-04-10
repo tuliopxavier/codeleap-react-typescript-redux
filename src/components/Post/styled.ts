@@ -5,8 +5,20 @@ export const PostItem = styled.article<any>`
   flex-direction: column;
   border: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? '1px solid #99999950' : '1px solid #999'};
   margin: 0 2.5rem 2rem;
-  font-size: 18px;
+  font-size: 1rem;
   min-height: 349px;
+
+  @media (max-width: 425px) {
+    margin: 0 2rem 2rem;
+  }
+
+  @media (max-width: 375px) {
+    margin: 0 1rem 2rem;
+  }
+
+  @media (max-width: 320px) {
+        margin: 2.75rem 1rem;
+    }
 
   & header {
     display: flex;
@@ -26,6 +38,10 @@ export const PostItem = styled.article<any>`
         background-color: transparent;
         border: none;
         cursor: pointer;
+
+        @media (max-width: 425px) {
+            font-size: 1.5rem;
+        }
       }
     }
   }
