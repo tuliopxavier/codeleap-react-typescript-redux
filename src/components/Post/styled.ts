@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const PostItem = styled.article<any>`
   display: flex;
   flex-direction: column;
-  border: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? '1px solid #99999950' : '1px solid #999'};
+  border: ${({ isDeleting, isEditing }) =>
+    isDeleting || isEditing ? '1px solid #99999950' : '1px solid #999'};
   margin: 0 2.5rem 2rem;
   font-size: 1rem;
   min-height: 349px;
@@ -21,15 +22,18 @@ export const PostItem = styled.article<any>`
   }
 
   @media screen and (prefers-color-scheme: dark) {
-    border: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? '1px solid #00000050' : '1px solid #000'};
-    }
+    border: ${({ isDeleting, isEditing }) =>
+      isDeleting || isEditing ? '1px solid #00000050' : '1px solid #000'};
+  }
 
   & header {
     display: flex;
     justify-content: space-between;
     color: #fff;
-    filter: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 'blur(1px)' : ''};
-    opacity: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 0.25 : 1};
+    filter: ${({ isDeleting, isEditing }) =>
+      isDeleting || isEditing ? 'blur(1px)' : ''};
+    opacity: ${({ isDeleting, isEditing }) =>
+      isDeleting || isEditing ? 0.25 : 1};
 
     @media screen and (prefers-color-scheme: dark) {
       color: #ddd;
@@ -48,7 +52,7 @@ export const PostItem = styled.article<any>`
         cursor: pointer;
 
         @media (max-width: 425px) {
-            font-size: 1.5rem;
+          font-size: 1.5rem;
         }
 
         @media screen and (prefers-color-scheme: dark) {
@@ -63,8 +67,10 @@ export const PostItem = styled.article<any>`
     display: flex;
     justify-content: space-between;
     margin: 1.5rem 2rem;
-    filter: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 'blur(1px)' : ''};
-    opacity: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 0.25 : 1};
+    filter: ${({ isDeleting, isEditing }) =>
+      isDeleting || isEditing ? 'blur(1px)' : ''};
+    opacity: ${({ isDeleting, isEditing }) =>
+      isDeleting || isEditing ? 0.25 : 1};
 
     @media screen and (prefers-color-scheme: dark) {
       color: #ddd;
@@ -73,8 +79,10 @@ export const PostItem = styled.article<any>`
 
   & > p {
     margin: 0 2rem 1.5rem;
-    filter: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 'blur(1px)' : ''};
-    opacity: ${({ isDeleting, isEditing }) => isDeleting || isEditing ? 0.25 : 1};
+    filter: ${({ isDeleting, isEditing }) =>
+      isDeleting || isEditing ? 'blur(1px)' : ''};
+    opacity: ${({ isDeleting, isEditing }) =>
+      isDeleting || isEditing ? 0.25 : 1};
 
     &:last-of-type {
       margin-bottom: 2.5rem;
@@ -82,15 +90,20 @@ export const PostItem = styled.article<any>`
   }
 
   &.fade-out {
-    animation: fadeout .5s ease forwards;
+    animation: fadeout 0.5s ease forwards;
 
-    @keyframes fadeout { 
-      0% {opacity: 1; transform: translate(0)}
-      100% {opacity: 0; transform: translate(-20rem, 0)}
+    @keyframes fadeout {
+      0% {
+        opacity: 1;
+        transform: translate(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-20rem, 0);
+      }
     }
   }
 `;
-
 
 export const DeleteDialog = styled.dialog`
   position: absolute;
@@ -144,7 +157,7 @@ export const EditDialog = styled.dialog`
   }
 
   & p {
-      margin-bottom: 2rem;
+    margin-bottom: 2rem;
   }
 
   & div {
@@ -159,7 +172,7 @@ export const EditDialog = styled.dialog`
     gap: 0;
 
     & label {
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
 
     & input {
@@ -177,15 +190,15 @@ export const EditDialog = styled.dialog`
     }
 
     & textarea {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1rem;
-        padding: .5rem .75rem;
-        border-radius: .25rem;
-        margin-bottom: 2rem;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.25rem;
+      margin-bottom: 2rem;
 
-        &::placeholder {
-            opacity: .3;
-        }
+      &::placeholder {
+        opacity: 0.3;
+      }
     }
   }
 
