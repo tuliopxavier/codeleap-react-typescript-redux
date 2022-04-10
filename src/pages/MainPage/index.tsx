@@ -1,74 +1,65 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { Main } from '../../components/Main';
 import { Button } from '../../components/Button';
 import { Post } from '../../components/Post';
 import { MdKeyboardArrowUp, MdLogout } from 'react-icons/Md';
-import { format } from 'date-fns';
-import { Section, UpButton } from './styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setUsername } from '../../actions/userSlice';
 import { setPosts } from '../../actions/postsSlice';
+import { Section, UpButton } from './styled';
 // import api from '../../actions/services/api';
 
 export const MainPage = () => {
-    const [inputValue, setInputValue] = useState('');
-    const [textareaValue, setTextareaValue] = useState('');
-
-    const [id, setId] = useState(10);
-    const [isDisabled, setIsDisabled] = useState(true);
-    const [hideScrollTopButton, setHideScrollTopButton] = useState('hide-button');
-
     const username = useSelector((state: RootState) => state.username.value);
     const posts = useSelector((state: RootState) => state.posts.value);
     const dispatch = useDispatch();
     
-    const input = useRef<HTMLInputElement>(null);
-    const textarea = useRef<HTMLTextAreaElement>(null);
+    const [titleValue, setTitleValue] = useState('');
+    const [contentValue, setContentValue] = useState('');
+    const [postId, setPostId] = useState(posts.length);
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [hideScrollTopButton, setHideScrollTopButton] = useState('hide-button');
 
-    // IF GOING TO FETCH FROM THE API
+    // IF GOING TO FETCH DATA FROM THE API
     // async function getPosts() {
     //     const { data } = await api.get('/?format=json');
     //     setPosts(data.results);        
     // };
 
+    // useEffect(() => {
+    //     getPosts();
+    // }, []);
+
+    const input = useRef<HTMLInputElement>(null);
     useEffect(() => {
         input?.current?.focus();
-        // getPosts();
     }, []);
 
-    function handleChangeInput(e: React.ChangeEvent<HTMLInputElement>) {
-        (input?.current?.value.length && textarea?.current?.value.length) ? setIsDisabled(false) : setIsDisabled(true);
-        setInputValue(e.target.value);
-    };
-
-    function handleChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
-        (input?.current?.value.length && textarea?.current?.value.length) ? setIsDisabled(false) : setIsDisabled(true);
-        setTextareaValue(e.target.value);
-    };
+    useEffect(() => {
+        (titleValue && contentValue) ? setIsDisabled(false) : setIsDisabled(true);
+    },[titleValue, contentValue]);
 
     function handleSubmit(e: MouseEvent) {
         e.preventDefault();
-        if (!inputValue) return;
-        if (!textareaValue) return;
+        if (!titleValue) return;
+        if (!contentValue) return;
 
-        setId(id + 1);
-        let date = format(new Date(), "HH:mm:ss");
+        setPostId(postId + 1);
+        let date = new Date();
 
         const newPost = {
-            id: id,
+            id: postId,
             username: username,
-            created_datetime: date,
-            title: inputValue,
-            content: textareaValue
+            created_datetime: date.toString(),
+            title: titleValue,
+            content: contentValue
         };
         
         dispatch(setPosts(newPost));
-        console.log(posts);
         
-        setInputValue('');
-        setTextareaValue('');
+        setTitleValue('');
+        setContentValue('');
         input?.current?.focus();
         window.scroll({ top: 645, behavior: "smooth" });
     };
@@ -91,40 +82,36 @@ export const MainPage = () => {
 
     return (
         <Main>
-            {username ?
-                <Section>
-                    <header>
-                        <h1>CodeLeap Network</h1>
-                        <Button onClick={handleLogout}><MdLogout />Logout</Button>
-                    </header>
+            <Section>
+                <header>
+                    <h1>CodeLeap Network</h1>
+                    <Button onClick={handleLogout}><MdLogout />Logout</Button>
+                </header>
 
-                    <form>
-                        <h2>What's on your mind?</h2>
+                <form>
+                    <h2>What's on your mind?</h2>
 
-                        <label htmlFor="title">
-                            Title {isDisabled && <small>(required)</small>}
-                        </label>
-                        <input ref={input} value={inputValue} onChange={handleChangeInput} type="text" id="title" placeholder="Hello World" maxLength={50} required />
+                    <label htmlFor="title">
+                        Title {isDisabled && <small>(required)</small>}
+                    </label>
+                    <input ref={input} value={titleValue} onChange={(e) => setTitleValue(e.target.value)} type="text" id="title" placeholder="Hello World" maxLength={50} required />
 
-                        <label htmlFor="content">
-                            Content {isDisabled && <small>(required)</small>}
-                        </label>
-                        <textarea ref={textarea} value={textareaValue} onChange={handleChangeTextarea} id="content" cols={30} rows={10} placeholder="Content here" maxLength={805} required></textarea>
+                    <label htmlFor="content">
+                        Content {isDisabled && <small>(required)</small>}
+                    </label>
+                    <textarea value={contentValue} onChange={(e) => setContentValue(e.target.value)} id="content" cols={30} rows={10} placeholder="Content here" maxLength={805} required></textarea>
 
-                        <Button onClick={handleSubmit}disabled={isDisabled}>Create</Button>
-                    </form>
+                    <Button onClick={handleSubmit} disabled={isDisabled}>Create</Button>
+                </form>
 
-                    <ul className="posts-list">
-                        {posts?.map(post => { return <Post key={post.id} post={post} /> })}
-                    </ul>
+                <ul className="posts-list">
+                    {posts?.map(post => { return <Post key={post.id} post={post} /> })}
+                </ul>
 
-                    <UpButton className={hideScrollTopButton} onClick={handleScrollTop} aria-label="scroll to top button">
-                        <MdKeyboardArrowUp />
-                    </UpButton>
-                </Section>
-                :
-                <Navigate to='/signup' />
-            }
+                <UpButton className={hideScrollTopButton} onClick={handleScrollTop} aria-label="scroll to top button">
+                    <MdKeyboardArrowUp />
+                </UpButton>
+            </Section>
         </Main>
     );
 };

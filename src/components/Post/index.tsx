@@ -1,79 +1,66 @@
 import type { PostItemProps } from '../../types/PostTypes';
-import { ChangeEvent, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { MdDeleteForever } from 'react-icons/Md';
 import { FaEdit } from 'react-icons/Fa';
 import { Button } from '../Button';
-import useClickOutside from '../../hooks/useClickOutside';
-import Fade from 'react-reveal/Fade';
-import { DeleteDialog, EditDialog, PostItem } from './styled';
+import { Fade } from "react-awesome-reveal";
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePost, editPost } from '../../actions/postsSlice';
 import { RootState } from '../../redux/store';
+import { deletePost, editPost } from '../../actions/postsSlice';
+import { formatDistanceToNow } from 'date-fns';
+import useClickOutside from '../../hooks/useClickOutside';
+import { DeleteDialog, EditDialog, PostItem } from './styled';
 
 export const Post = ({post}: PostItemProps) => {
     const { id, username, created_datetime, title, content } = post;
+    
     const [editedTitle, setEditedTitle ] = useState(title);
     const [editedContent, setEditedContent ] = useState(content);
-
-    const [isDeleting, setIsDeleting] = useState<boolean>(false);
-    const [isEditing, setIsEditing] = useState<boolean>(false);
-    const deleteDialog = useRef<HTMLDivElement>(null);
-    const editDialog = useRef<HTMLDivElement>(null);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [fadeOutPost, setFadeOutPost] = useState('');
     
     const Username = useSelector((state: RootState) => state.username.value);
-
     const dispatch = useDispatch();
 
     // handle click outside modal
-    useClickOutside(deleteDialog, () => {
-        setIsDeleting(false);
-    });
-    useClickOutside(editDialog, () => {
-        setIsEditing(false);
-    });
-
-    function toogleDeleteModal(e: React.MouseEvent<HTMLButtonElement>) {
-        e.preventDefault();
-        setIsDeleting(true);
-    };
-
-    function toogleEditModal(e: React.MouseEvent<HTMLButtonElement>) {
-        e.preventDefault();
-        setIsEditing(true);
-    };
-
-    function handleTitleChange(e: ChangeEvent<HTMLInputElement>) {
-        setEditedTitle(e.target.value);
-    }
-
-    function handleContentChange(e: ChangeEvent<HTMLTextAreaElement>) {
-        setEditedContent(e.target.value);
-        
-    }
-
-    function handleDeletePost(id: number) {
-        dispatch(deletePost(id));
-    };
+    const deleteDialog = useRef<HTMLDivElement>(null);
+    const editDialog = useRef<HTMLDivElement>(null);
+    useClickOutside(deleteDialog, () => { setIsDeleting(false); });
+    useClickOutside(editDialog, () => { setIsEditing(false); });
 
     function handleEditPost(id: number) {
+        if (!editedTitle || !editedContent) {
+            setIsEditing(false); 
+            return;
+        }
         dispatch(editPost({id: id, title: editedTitle, content: editedContent}));
         setIsEditing(false);
     };
 
+    function handleDeletePost(id: number) {
+        setTimeout(() => {
+            dispatch(deletePost(id));
+        },500);
+        setIsDeleting(false);
+        setFadeOutPost('fade-out');
+    };
+
+
     return (
-        <Fade bottom>
-            <PostItem isDeleting={isDeleting} isEditing={isEditing}>
+        <Fade direction='up' cascade triggerOnce >
+            <PostItem className={fadeOutPost} isDeleting={isDeleting} isEditing={isEditing}>
                 <header>
                     <h3>{title}</h3>
                     {username === Username && <div className="icons">
-                        <button onClick={toogleDeleteModal} aria-label="Delete post button"><MdDeleteForever /></button>
-                        <button onClick={toogleEditModal} aria-label="Edit post button"><FaEdit /></button>
+                        <button onClick={()=>setIsDeleting(true)} aria-label="Delete post button"><MdDeleteForever /></button>
+                        <button onClick={()=>setIsEditing(true)} aria-label="Edit post button"><FaEdit /></button>
                     </div>}
                 </header>
 
                 <div className="post-info">
                     <p>@{username}</p>
-                    <p>{created_datetime}</p>
+                    <p>{`${formatDistanceToNow(new Date (created_datetime))} ago`}</p>
                 </div>
 
                 <p> {content} </p>
@@ -92,9 +79,9 @@ export const Post = ({post}: PostItemProps) => {
                     <p>Edit Item</p>
                     <div className="edit-content">
                         <label htmlFor="title">Title</label>
-                        <input type="text" id="title" defaultValue={title} onChange={handleTitleChange} placeholder="Hello world" />
+                        <input type="text" id="title" defaultValue={title} onChange={(e) => setEditedTitle(e.target.value)} placeholder="Hello world" />
                         <label htmlFor="content">Content</label>
-                        <textarea id="content" defaultValue={content} onChange={handleContentChange} placeholder="Content here" maxLength={805} cols={30} rows={2} required />
+                        <textarea id="content" defaultValue={content} onChange={(e) => setEditedContent(e.target.value)} placeholder="Content here" maxLength={805} cols={30} rows={2} required />
                     </div>
                     <div>
                         <Button color="#000" backgroundColor="#fff" onClick={() => setIsEditing(false)}>Cancel</Button>
