@@ -1,12 +1,7 @@
-import { ReactNode } from 'react';
+import type { MainProps } from '../../types/MainTypes'
 import { MainStyled } from './styled'
 
-type MainProps = {
-    children: ReactNode;
-}
-
 export const Main = ({children}: MainProps) => {
-    
     return (
         <MainStyled>
             {children}

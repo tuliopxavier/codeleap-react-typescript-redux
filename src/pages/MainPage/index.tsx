@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Main } from '../../components/Main';
 import { Button } from '../../components/Button';
 import { Post } from '../../components/Post';
-import { MdKeyboardArrowUp, MdLogout } from 'react-icons/Md';
+import { MdKeyboardArrowUp, MdLogout } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setUsername } from '../../actions/userSlice';

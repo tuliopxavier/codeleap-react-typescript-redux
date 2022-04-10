@@ -1,7 +1,7 @@
 import type { PostItemProps } from '../../types/PostTypes';
 import { useRef, useState } from 'react';
-import { MdDeleteForever } from 'react-icons/Md';
-import { FaEdit } from 'react-icons/Fa';
+import { MdDeleteForever } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
 import { Button } from '../Button';
 import { Fade } from "react-awesome-reveal";
 import { useDispatch, useSelector } from 'react-redux';
