@@ -89,7 +89,7 @@ export const MainPage = () => {
                 </header>
 
                 <form>
-                    <h2>What's on your mind?</h2>
+                    <h2>What's on your mind, <span>{username}</span>?</h2>
 
                     <label htmlFor="title">
                         Title {isDisabled && <small>(required)</small>}

@@ -82,6 +82,10 @@ background-color: #fff;
         @media (max-width: 425px) {
             font-size: 1.25rem;
         }
+
+        & span {
+            text-decoration: underline;
+        }
     }
 
     & label {
