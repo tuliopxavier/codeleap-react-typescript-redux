@@ -7,7 +7,6 @@ export const PostItem = styled.article<any>`
   margin: 0 2.5rem 2rem;
   font-size: 18px;
   min-height: 349px;
-  transition: all .5 ease;
 
   & header {
     display: flex;
@@ -47,6 +46,15 @@ export const PostItem = styled.article<any>`
 
     &:last-of-type {
       margin-bottom: 2.5rem;
+    }
+  }
+
+  &.fade-out {
+    animation: fadeout .5s ease forwards;
+
+    @keyframes fadeout { 
+      0% {opacity: 1; transform: translate(0)}
+      100% {opacity: 0; transform: translate(-20rem, 0)}
     }
   }
 `;

@@ -2,6 +2,6 @@ export type ButtonProps = {
     color?: string;
     backgroundColor?: string;
     children: any;
-    onClick?: (e: MouseEvent)=>void;
+    onClick?: (e: any) => void;
     disabled?: boolean;
 }
