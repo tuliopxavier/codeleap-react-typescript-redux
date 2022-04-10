@@ -29,4 +29,16 @@ export const ButtonStyled = styled.button<ButtonProps>`
     padding: 0.5rem 0;
     font-size: 0.75rem;
   }
+
+  @media screen and (prefers-color-scheme: dark) {
+    color: #ddd;
+    background-color: #222;
+    border: 1px solid #ddd;
+
+    &:hover {
+      color: #222;
+      background-color: #ddd;
+      border: 1px solid #222;
+    }
+  }
 `;

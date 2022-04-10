@@ -17,7 +17,10 @@ export const GlobalStyles = createGlobalStyle`
 
     body {
         font-family: 'Roboto', sans-serif;
+        
+        @media screen and (prefers-color-scheme: dark) {
+            color: #ddd;
+            background-color: #222;
+        }
     }
-
-    /* @media (max-width: 768px) {} */
-`
+`;
