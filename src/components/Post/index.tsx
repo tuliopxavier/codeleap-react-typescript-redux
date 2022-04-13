@@ -20,7 +20,7 @@ export const Post = ({post}: PostItemProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const [fadeOutPost, setFadeOutPost] = useState('');
     
-    const Username = useSelector((state: RootState) => state.username.value);
+    const Username = useSelector((state: RootState) => state.username?.value);
     const dispatch = useDispatch();
 
     // handle click outside modal

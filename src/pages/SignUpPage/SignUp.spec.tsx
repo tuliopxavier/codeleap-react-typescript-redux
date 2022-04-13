@@ -14,5 +14,6 @@ describe('Sign up page', () => {
     it('should render sign up page', () => {
         render(<SignUpPage/>);
         expect(screen.getByText('Welcome to CodeLeap network!')).toBeTruthy();
+        expect(screen.getByText('Enter')).toBeTruthy();
     });
 });
