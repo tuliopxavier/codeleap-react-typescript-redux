@@ -15,6 +15,18 @@ Deploy with **continuous deployment** at **Vercel**.
 
 <hr>
 
+<img style="width: 80%" src="https://github.com/tuliopxavier/images-repo/blob/main/Screen%20Shot%202022-04-13%20at%2004.52.24.png?raw=true"/>
+<div style="display: flex">
+<img style="width: 40%" src="https://github.com/tuliopxavier/images-repo/blob/main/Screen%20Shot%202022-04-13%20at%2004.53.38.png?raw=true"/>
+<img style="width: 40%" src="https://github.com/tuliopxavier/images-repo/blob/main/Screen%20Shot%202022-04-13%20at%2004.52.51.png?raw=true"/>
+<div/>
+<div style="display: flex">
+<img style="width: 40%" src="https://github.com/tuliopxavier/images-repo/blob/main/Screen%20Shot%202022-04-13%20at%2004.53.56.png?raw=true"/>
+<img style="width: 40%" src="https://github.com/tuliopxavier/images-repo/blob/main/Screen%20Shot%202022-04-13%20at%2004.53.13.png?raw=true"/>
+<div/>
+  
+<hr>
+
 ### 🧪 To try
 - Clone repository: ```git clone https://github.com/tuliopxavier/codeleap-react-typescript-redux.git```
 - Install dependencies: ```yarn install```
