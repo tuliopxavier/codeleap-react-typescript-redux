@@ -37,7 +37,7 @@ export const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        (titleValue && contentValue) ? setIsDisabled(false) : setIsDisabled(true);
+        (titleValue.trim() && contentValue.trim()) ? setIsDisabled(false) : setIsDisabled(true);
     },[titleValue, contentValue]);
 
     function handleSubmit(e: MouseEvent) {

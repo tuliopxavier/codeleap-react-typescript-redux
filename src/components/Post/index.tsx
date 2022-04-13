@@ -76,12 +76,11 @@ export const Post = ({post}: PostItemProps) => {
 
                 {/* confirm edit modal */}
                 <EditDialog ref={editDialog} open={isEditing ? true : false}>
-                    <p>Edit Item</p>
                     <div className="edit-content">
-                        <label htmlFor="title">Title</label>
+                        <label htmlFor="title">Edit Title</label>
                         <input type="text" id="title" defaultValue={title} onChange={(e) => setEditedTitle(e.target.value)} placeholder="Hello world" />
-                        <label htmlFor="content">Content</label>
-                        <textarea id="content" defaultValue={content} onChange={(e) => setEditedContent(e.target.value)} placeholder="Content here" maxLength={805} cols={30} rows={2} required />
+                        <label htmlFor="content">Edit Content</label>
+                        <textarea id="content" defaultValue={content} onChange={(e) => setEditedContent(e.target.value)} placeholder="Content here" maxLength={805} cols={30} rows={5} required />
                     </div>
                     <div>
                         <Button color="#000" backgroundColor="#fff" onClick={() => setIsEditing(false)}>Cancel</Button>
