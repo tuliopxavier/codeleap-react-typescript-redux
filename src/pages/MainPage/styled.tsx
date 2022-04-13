@@ -93,7 +93,7 @@ background-color: #fff;
     }
 
     & small {
-    color: #777;
+    color: #ccc;
     margin-left: .5rem;
     }
 
