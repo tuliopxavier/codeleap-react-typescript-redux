@@ -25,7 +25,7 @@ export const Form = styled.form`
   }
 
   & small {
-    color: #777;
+    color: #ccc;
     margin-left: 0.5rem;
   }
 
