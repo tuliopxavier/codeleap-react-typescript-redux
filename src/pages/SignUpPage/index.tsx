@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button } from '../../components/Button';
 import { Main } from  '../../components/Main'
@@ -10,8 +10,8 @@ export const SignUpPage = () => {
     const input = useRef<any>();
     const dispatch = useDispatch();
     
-    function handleInput(e: ChangeEvent<HTMLInputElement>) {
-        (input.current.value.length) ? setIsDisabled(false) : setIsDisabled(true);
+    function handleInput() {
+        (input.current.value.trim().length) ? setIsDisabled(false) : setIsDisabled(true);
     };
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {

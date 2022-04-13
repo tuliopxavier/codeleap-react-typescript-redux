@@ -11,13 +11,13 @@ import { Section, UpButton } from './styled';
 // import api from '../../actions/services/api';
 
 export const MainPage = () => {
-    const username = useSelector((state: RootState) => state.username.value);
-    const posts = useSelector((state: RootState) => state.posts.value);
+    const username = useSelector((state: RootState) => state.username?.value);
+    const posts = useSelector((state: RootState) => state.posts?.value);
     const dispatch = useDispatch();
     
     const [titleValue, setTitleValue] = useState('');
     const [contentValue, setContentValue] = useState('');
-    const [postId, setPostId] = useState(posts.length);
+    const [postId, setPostId] = useState(posts?.length);
     const [isDisabled, setIsDisabled] = useState(true);
     const [hideScrollTopButton, setHideScrollTopButton] = useState('hide-button');
 
@@ -37,7 +37,7 @@ export const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        (titleValue && contentValue) ? setIsDisabled(false) : setIsDisabled(true);
+        (titleValue.trim() && contentValue.trim()) ? setIsDisabled(false) : setIsDisabled(true);
     },[titleValue, contentValue]);
 
     function handleSubmit(e: MouseEvent) {

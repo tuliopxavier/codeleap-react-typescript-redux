@@ -147,7 +147,7 @@ export const EditDialog = styled.dialog`
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 661px;
-  height: 90%;
+  height: fit-content;
   padding: 2rem;
   border: 1px solid #000;
   animation: modal-animation 0.25s ease;
