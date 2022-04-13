@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/core": "7.0.0",
@@ -23,11 +24,19 @@
   },
   "devDependencies": {
     "@honkhonk/vite-plugin-svgr": "^1.1.0",
+    "@swc/core": "^1.2.165",
+    "@swc/jest": "^0.2.20",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "12.1.2",
+    "@testing-library/user-event": "^14.0.4",
+    "@types/jest": "^27.4.1",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.24",
     "@vitejs/plugin-react": "^1.0.7",
+    "jest": "^27.5.1",
+    "ts-node": "^10.7.0",
     "typescript": "^4.5.4",
     "vite": "^2.9.0"
   }
