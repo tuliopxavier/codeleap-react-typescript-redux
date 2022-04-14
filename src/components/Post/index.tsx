@@ -48,7 +48,7 @@ export const Post = ({post}: PostItemProps) => {
 
 
     return (
-        <Fade direction='up' cascade triggerOnce >
+        <div data-testid='post-item'>
             <PostItem className={fadeOutPost} isDeleting={isDeleting} isEditing={isEditing}>
                 <header>
                     <h3>{title}</h3>
@@ -89,6 +89,6 @@ export const Post = ({post}: PostItemProps) => {
                 </EditDialog>
                 
             </PostItem>
-        </Fade>
+        </div>
     );
 };
