@@ -8,7 +8,6 @@ import { RootState } from '../../redux/store';
 import { setUsername } from '../../actions/userSlice';
 import { setPosts } from '../../actions/postsSlice';
 import { Section, UpButton } from './styled';
-// import api from '../../actions/services/api';
 
 export const MainPage = () => {
     const username = useSelector((state: RootState) => state.username?.value);
@@ -20,16 +19,6 @@ export const MainPage = () => {
     const [postId, setPostId] = useState(posts?.length);
     const [isDisabled, setIsDisabled] = useState(true);
     const [hideScrollTopButton, setHideScrollTopButton] = useState('hide-button');
-
-    // IF GOING TO FETCH DATA FROM THE API
-    // async function getPosts() {
-    //     const { data } = await api.get('/?format=json');
-    //     setPosts(data.results);        
-    // };
-
-    // useEffect(() => {
-    //     getPosts();
-    // }, []);
 
     const input = useRef<HTMLInputElement>(null);
     useEffect(() => {
