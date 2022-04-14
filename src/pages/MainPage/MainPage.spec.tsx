@@ -1,21 +1,23 @@
-import { render as rtlRender, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import { fireEvent, render as rtlRender, screen, waitFor } from '@testing-library/react';
 import { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { MainPage } from '.';
-import { createStore } from 'redux';
-import userReducer from '../../actions/userSlice';
-import postsReducer from '../../actions/postsSlice';
-import { configureStore } from '@reduxjs/toolkit';
+import { store } from '../../redux/store';
 
-const store = createStore(() =>
-    configureStore({
-        reducer: {
-            username: userReducer,
-            posts: postsReducer
-        }
-    })
-);
+// IF NEEDED TO STARTING TESTS WITH A EMPTY STATE
+// import { createStore } from 'redux';
+// import userReducer from '../../actions/userSlice';
+// import postsReducer from '../../actions/postsSlice';
+// import { configureStore } from '@reduxjs/toolkit';
+
+// const store = createStore(() =>
+//     configureStore({
+//         reducer: {
+//             username: userReducer,
+//             posts: postsReducer
+//         }
+//     })
+// );
 
 const render = (component: ReactElement) => rtlRender(
     <Provider store={store}>
@@ -24,23 +26,46 @@ const render = (component: ReactElement) => rtlRender(
 );
 
 describe('Main page', () => {
-    it('should render the page', () => {
+    it('should render the page', async () => {
         render(<MainPage/>);
-        expect(screen.getByText('CodeLeap Network')).toBeTruthy();
+        expect(screen.getByText('CodeLeap Network')).toBeInTheDocument();
+
+        const posts = await screen.findAllByTestId('post-item');
+        expect(posts).toHaveLength(10);
     });
 
-    // it('should be able to create a new post', () => {
-    //     render(<MainPage/>);
+    it('should be able to create a new post', async () => {
+        render(<MainPage/>);
 
-    //     const titleInput = screen.getByPlaceholderText('Hello World');
-    //     const contentInput = screen.getByPlaceholderText('Content here');
-    //     userEvent.type(titleInput, 'Testing the title input');
-    //     userEvent.type(contentInput, 'Testing the content input');
+        const posts = await screen.findAllByTestId('post-item');
+        expect(posts).toHaveLength(10);
+
+        const buttonSubmit = screen.getByText('Create');
+        expect(buttonSubmit).toBeDisabled();
+
+        const titleInput = screen.getByLabelText('Title (required)');
+        const contentInput = screen.getByLabelText('Content (required)');
+
+        fireEvent.change(titleInput, {
+            target: {
+                value: 'Testing the title input'
+            }
+        });
+        fireEvent.change(contentInput, {
+            target: {
+                value: 'Testing the content input'
+            }
+        });
+
+        expect(buttonSubmit).toBeEnabled();
+        fireEvent.click(buttonSubmit);
+
+        const updatedPosts = await screen.findAllByTestId('post-item');
+        expect(updatedPosts).toHaveLength(11);
         
-    //     const buttonSubmit = screen.getByText('Create');
-    //     userEvent.click(buttonSubmit);
-          
-    //     expect(screen.getByText('Testing the title input')).toBeInTheDocument();
-    //     expect(screen.getByText('Testing the content input')).toBeInTheDocument();
-    // });
+        await waitFor(() => {
+            expect(screen.getAllByText('Testing the title input')).toBeTruthy();
+            expect(screen.getAllByText('Testing the content input')).toBeTruthy();
+        });
+    });
 });

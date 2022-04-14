@@ -1,5 +1,4 @@
 import { render as rtlRender, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
 import { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { Post } from '.';
@@ -32,8 +31,8 @@ const post = {
 };
 
 describe('Post item', () => {
-    it('should render the post', () => {
-        render(<Post post={post}/>);
+    it('should render the posts', () => {
+        render(<Post post={post} />);
         expect(screen.getByText('My First Post at CodeLeap Network!')).toBeTruthy();
     });
 });

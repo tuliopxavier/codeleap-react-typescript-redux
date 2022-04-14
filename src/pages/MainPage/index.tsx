@@ -46,7 +46,7 @@ export const MainPage = () => {
         if (!contentValue) return;
 
         setPostId(postId + 1);
-        let date = new Date();
+        const date = new Date();
 
         const newPost = {
             id: postId,
@@ -70,7 +70,7 @@ export const MainPage = () => {
 
     // show scrolling top button at window view bottom
     window.onscroll = function () {
-        let currentScrollPosition = window.pageYOffset;
+        const currentScrollPosition = window.pageYOffset;
         const windowViewHeight = window.innerHeight;
 
         (currentScrollPosition > windowViewHeight) ? setHideScrollTopButton('') : setHideScrollTopButton('hide-button');
@@ -94,7 +94,7 @@ export const MainPage = () => {
                     <label htmlFor="title">
                         Title {isDisabled && <small>(required)</small>}
                     </label>
-                    <input ref={input} value={titleValue} onChange={(e) => setTitleValue(e.target.value)} type="text" id="title" placeholder="Hello World" maxLength={50} required />
+                    <input ref={input} value={titleValue} onChange={(e) => setTitleValue(e.target.value)} type="text" id="title" placeholder="Hello world" maxLength={50} required />
 
                     <label htmlFor="content">
                         Content {isDisabled && <small>(required)</small>}

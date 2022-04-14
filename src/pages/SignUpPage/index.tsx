@@ -28,11 +28,10 @@ export const SignUpPage = () => {
         <Main>
             <Form onSubmit={handleSubmit}>
                 <h1>Welcome to CodeLeap network!</h1>
-                <label htmlFor="">
-                    Please enter your user name
-                    {isDisabled && <small>(required)</small>}
+                <label htmlFor="usernameInput">
+                    Please enter your user name {isDisabled && <small>(required)</small>}
                 </label>
-                <input ref={input} onChange={handleInput} type="text" placeholder="John Doe" maxLength={40} required />
+                <input ref={input} onChange={handleInput} type="text" placeholder="John Doe" id="usernameInput" maxLength={40} required />
                 <Button disabled={isDisabled}>Enter</Button>
             </Form>
         </Main>
