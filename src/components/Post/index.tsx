@@ -48,8 +48,10 @@ export const Post = ({post}: PostItemProps) => {
 
 
     return (
-        <div data-testid='post-item'>
-            <PostItem className={fadeOutPost} isDeleting={isDeleting} isEditing={isEditing}>
+
+        <Fade direction="up" triggerOnce cascade  >
+            
+            <PostItem className={fadeOutPost} data-testid='post-item' isDeleting={isDeleting} isEditing={isEditing}>
                 <header>
                     <h3>{title}</h3>
                     {username === Username && <div className="icons">
@@ -87,8 +89,8 @@ export const Post = ({post}: PostItemProps) => {
                         <Button color="#000" backgroundColor="#fff" onClick={() => handleEditPost(id)}>Save</Button>
                     </div>
                 </EditDialog>
-                
+
             </PostItem>
-        </div>
+        </Fade>
     );
 };

@@ -2,23 +2,27 @@ import { render as rtlRender, screen } from '@testing-library/react';
 import { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { Post } from '.';
-import { createStore } from 'redux';
-import userReducer from '../../actions/userSlice';
-import postsReducer from '../../actions/postsSlice';
-import { configureStore } from '@reduxjs/toolkit';
+import { store } from '../../redux/store';
 
-const postStore = createStore(() =>
-    configureStore({
-        reducer: {
-            username: userReducer,
-            posts: postsReducer
-        }
-    })
-);
+// // IF NEEDED TO STARTING TESTS WITH A EMPTY REDUX STATES
+// import { createStore } from 'redux';
+// import userReducer from '../../actions/userSlice';
+// import postsReducer from '../../actions/postsSlice';
+// import { configureStore } from '@reduxjs/toolkit';
 
+// const store = createStore(() =>
+//     configureStore({
+//         reducer: {
+//             username: userReducer,
+//             posts: postsReducer
+//         }
+//     })
+// );
+
+// setting provider
 const render = (component: ReactElement) => rtlRender(
-    <Provider store={postStore}>
-        {component}
+    <Provider store={store}>
+        {component}   
     </Provider>
 );
 
