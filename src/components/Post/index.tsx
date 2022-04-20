@@ -23,12 +23,6 @@ export const Post = ({post}: PostItemProps) => {
     const Username = useSelector((state: RootState) => state.username?.value);
     const dispatch = useDispatch();
 
-    // handle click outside modal
-    const deleteDialog = useRef<HTMLDivElement>(null);
-    const editDialog = useRef<HTMLDivElement>(null);
-    useClickOutside(deleteDialog, () => { setIsDeleting(false); });
-    useClickOutside(editDialog, () => { setIsEditing(false); });
-
     function handleEditPost(id: number) {
         if (!editedTitle || !editedContent) {
             setIsEditing(false); 
@@ -46,17 +40,28 @@ export const Post = ({post}: PostItemProps) => {
         setFadeOutPost('fade-out');
     };
 
+    function handleCancelEdit() {
+        setEditedTitle(title);
+        setEditedContent(content);
+        setIsEditing(false);
+    };
+
+    // handle click outside modal
+    const deleteDialog = useRef<HTMLDivElement>(null);
+    const editDialog = useRef<HTMLDivElement>(null);
+    useClickOutside(deleteDialog, () => { setIsDeleting(false); });
+    useClickOutside(editDialog, () => { handleCancelEdit(); });
 
     return (
 
         <Fade direction="up" triggerOnce cascade  >
-            
+
             <PostItem className={fadeOutPost} data-testid='post-item' isDeleting={isDeleting} isEditing={isEditing}>
                 <header>
                     <h3>{title}</h3>
                     {username === Username && <div className="icons">
-                        <button onClick={()=>setIsDeleting(true)} aria-label="Delete post button"><MdDeleteForever /></button>
-                        <button onClick={()=>setIsEditing(true)} aria-label="Edit post button"><FaEdit /></button>
+                        <button onClick={()=>setIsDeleting(true)} data-testid="delete-button" aria-label="Delete post button"><MdDeleteForever /></button>
+                        <button onClick={()=>setIsEditing(true)} data-testid="edit-button" aria-label="Edit post button"><FaEdit /></button>
                     </div>}
                 </header>
 
@@ -80,12 +85,12 @@ export const Post = ({post}: PostItemProps) => {
                 <EditDialog ref={editDialog} open={isEditing ? true : false}>
                     <div className="edit-content">
                         <label htmlFor="title">Edit Title</label>
-                        <input type="text" id="title" defaultValue={title} onChange={(e) => setEditedTitle(e.target.value)} placeholder="Hello world" />
+                        <input type="text" id="title" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} placeholder="Hello world" />
                         <label htmlFor="content">Edit Content</label>
-                        <textarea id="content" defaultValue={content} onChange={(e) => setEditedContent(e.target.value)} placeholder="Content here" maxLength={805} cols={30} rows={5} required />
+                        <textarea id="content" value={editedContent} onChange={(e) => setEditedContent(e.target.value)} placeholder="Content here" maxLength={805} cols={30} rows={5} required />
                     </div>
                     <div>
-                        <Button color="#000" backgroundColor="#fff" onClick={() => setIsEditing(false)}>Cancel</Button>
+                        <Button color="#000" backgroundColor="#fff" onClick={handleCancelEdit} >Cancel</Button>
                         <Button color="#000" backgroundColor="#fff" onClick={() => handleEditPost(id)}>Save</Button>
                     </div>
                 </EditDialog>

@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const PostItem = styled.article<any>`
+interface PostItemProps {
+	isDeleting: boolean;
+	isEditing: boolean;
+}
+
+export const PostItem = styled.article<PostItemProps>`
   display: flex;
   flex-direction: column;
   border: ${({ isDeleting, isEditing }) =>
