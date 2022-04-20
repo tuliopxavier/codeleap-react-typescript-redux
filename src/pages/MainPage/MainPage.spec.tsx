@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { MainPage } from '.';
 import { store } from '../../redux/store';
 
-// IF NEEDED TO STARTING TESTS WITH A EMPTY STATE
+// // IF NEEDED TO STARTING TESTS WITH A EMPTY REDUX STATES
 // import { createStore } from 'redux';
 // import userReducer from '../../actions/userSlice';
 // import postsReducer from '../../actions/postsSlice';
@@ -19,6 +19,7 @@ import { store } from '../../redux/store';
 //     })
 // );
 
+// setting provider
 const render = (component: ReactElement) => rtlRender(
     <Provider store={store}>
         {component}

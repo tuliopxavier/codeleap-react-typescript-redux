@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const PostItem = styled.article<any>`
+interface PostItemProps {
+	isDeleting: boolean;
+	isEditing: boolean;
+}
+
+export const PostItem = styled.article<PostItemProps>`
   display: flex;
   flex-direction: column;
   border: ${({ isDeleting, isEditing }) =>
@@ -8,6 +13,7 @@ export const PostItem = styled.article<any>`
   margin: 0 2.5rem 2rem;
   font-size: 1rem;
   min-height: 349px;
+  position: relative;
 
   @media (max-width: 425px) {
     margin: 0 2rem 2rem;
@@ -142,8 +148,7 @@ export const DeleteDialog = styled.dialog`
 
 export const EditDialog = styled.dialog`
   position: absolute;
-  top: 46%;
-  left: 50%;
+  inset: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 661px;
